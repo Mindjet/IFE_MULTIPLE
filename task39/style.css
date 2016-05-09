@@ -9,21 +9,22 @@ th{
 }
 
 table{
-	margin: 50px auto;
+	margin: 150px auto 1600px auto;
 	text-align: center;	
-	outline: 1px solid black;
+	outline: 2px solid black;
 	width: 80%;
+	border-collapse: collapse;
 }
 
-table thead th{
+#thead th{
 
 	outline: 1px solid black;
 	background-color: #666;
 	color: white;
-	padding: 10px;
-	width: 20%;
-
+	padding: 10px 0;
+	
 }
+
 
 table tbody tr td{
 
