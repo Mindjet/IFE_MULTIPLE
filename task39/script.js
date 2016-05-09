@@ -195,29 +195,6 @@ function renderTable(){
 
 }
 
-function buildTbody(){
-
-	var tbody = document.getElementById('tbody')?document.getElementById('tbody'):document.createElement('tbody');
-	tbody.id = 'tbody';
-	tbody.innerHTML = '';
-	for (var i = 0; i < score.length; i++) {
-		tbody.appendChild(buildTr(i));
-	};
-	return tbody;
-
-}
-
-function buildTr(index){
-
-	var tr = document.createElement('tr');
-	for(var key in score[index]){
-		var td = document.createElement('td');
-		td.innerText = score[index][key];
-		tr.appendChild(td);
-	}
-	return tr;
-}
-
 function buildTh(name,clsName){
 
 	var th = document.createElement('th');
@@ -240,6 +217,29 @@ function buildTh(name,clsName){
 	
 	return th;
 
+}
+
+function buildTbody(){
+
+	var tbody = document.getElementById('tbody')?document.getElementById('tbody'):document.createElement('tbody');
+	tbody.id = 'tbody';
+	tbody.innerHTML = '';
+	for (var i = 0; i < score.length; i++) {
+		tbody.appendChild(buildTr(i));
+	};
+	return tbody;
+
+}
+
+function buildTr(index){
+
+	var tr = document.createElement('tr');
+	for(var key in score[index]){
+		var td = document.createElement('td');
+		td.innerText = score[index][key];
+		tr.appendChild(td);
+	}
+	return tr;
 }
 
 function arrowEvent(){
@@ -308,15 +308,17 @@ function freezeHead(){
 		myTop = table.offsetTop;
 		myLeft = table.offsetLeft;
 		tHeight = table.offsetHeight;
+		tWidth = table.offsetWidth;
 
+		// when the thead hits the window's top border, make the thead fixed
 		var thead = document.getElementById('thead');
 		if (window.pageYOffset>myTop) {
 
 			myWidth = thead.offsetWidth;
+			thead.style.width = myWidth + 'px';
 			thead.style.position = 'fixed';
 			thead.style.left = myLeft+'px';
 			thead.style.top = '0px';
-			thead.style.width = myWidth + 'px';
 
 			for (var i = 0; i < thead.children.length; i++) {
 				thead.children[i].style.width = myWidth/thead.children.length+'px';
@@ -324,6 +326,7 @@ function freezeHead(){
 
 		};
 
+		//when the table is over or back to the top, then move the thead to where it used to be
 		if (window.pageYOffset<myTop||window.pageYOffset>(tHeight+myTop+10)) {
 
 			thead.style.position = 'static';
